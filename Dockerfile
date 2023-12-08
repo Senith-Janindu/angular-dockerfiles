@@ -1,12 +1,17 @@
-#stage 1
+# Use Node.js version 15
+FROM node:15-alpine as build
 
-FROM node:14-alpine as build
 WORKDIR /usr/src/app
+
 # Install app dependencies
 COPY package.json .
 RUN npm install
+
 # Bundle app source
 COPY . .
-# Angular CLI
+
+# Install Angular CLI globally
 RUN npm install -g @angular/cli
+
+# Expose port 4200
 EXPOSE 4200
